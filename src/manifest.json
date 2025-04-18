@@ -1,0 +1,14 @@
+{
+  "$schema": "../node_modules/chrome-extension-manifest-json-schema/manifest/manifest.schema.v3.json",
+  "manifest_version": 3,
+  "name": "Coupon Clicker",
+  "version": "0.0.1",
+  "content_scripts": [
+    {
+      "matches": ["*://www.safeway.com/foru/coupons-deals.html"],
+      "js": ["content-script.ts"],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": ["debugger"]
+}
