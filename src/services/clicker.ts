@@ -1,5 +1,7 @@
 // Converted to TS from: https://gist.github.com/ctsstc/73a74ae0f0c315262bf07cea9fdc7aa2#file-safeway-just-for-u-clicker-js
 
+import { debugLog } from './logger';
+
 export class Clicker {
   private readonly delay: number;
   private readonly randomWait: boolean;
@@ -29,7 +31,7 @@ export class Clicker {
 
           // TODO: Use a real clicker; from debug-clicker
           // simulateTrustedClickOnElement(el);
-          console.log("🔥🔥🔥 CLICKED", el);
+          debugLog("CLICKED", el);
 
           if (isLast) {
             resolve();

@@ -1,9 +1,10 @@
-import { Clicker } from './services/clicker'
+import { Clicker } from './services/clicker';
+import { debugLog } from './services/logger';
 
-console.log("🔥🔥🔥 👋🌐 HELLO WORLD!!!", new Date().getTime());
+debugLog("👋🌐 HELLO WORLD!!!", new Date().getTime());
 
 window.addEventListener("load", () => {
-  console.log("🔥🔥🔥 PAGE LOADED");
+  debugLog("PAGE LOADED");
 
   // Copied from: https://gist.github.com/ctsstc/73a74ae0f0c315262bf07cea9fdc7aa2#file-safeway-just-for-u-clicker-js
   let coupons = new Clicker(window.document, "[id^=couponAddBtn]");
