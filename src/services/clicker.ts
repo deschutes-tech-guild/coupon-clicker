@@ -27,7 +27,7 @@ export class Clicker {
         setTimeout(() => {
           const isLast = index == all.length - 1;
 
-          // TODO: Use a real clicker
+          // TODO: Use a real clicker; from debug-clicker
           // simulateTrustedClickOnElement(el);
           console.log("🔥🔥🔥 CLICKED", el);
 
