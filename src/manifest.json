@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "content_scripts": [
     {
-      "matches": ["*://www.safeway.com/foru/coupons-deals.html"],
+      "matches": ["*://www.safeway.com/foru/coupons-deals.html*"],
       "js": ["content-script.ts"],
       "run_at": "document_start"
     }
