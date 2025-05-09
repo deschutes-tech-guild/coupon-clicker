@@ -12,24 +12,32 @@ export function simulateTrustedClickOnElement(
 }
 
 function simulateTrustedClickOnPosition(x: number, y: number, button = "left") {
+  const requiredVersion = "1.2";
+  const mouseEventCommand = "Input.dispatchMouseEvent";
+  enum MouseEventType {
+    MouseMoved = "mouseMoved",
+    MousePressed = "mousePressed",
+    MouseReleased = "mouseReleased",
+  }
+
   chrome.tabs.query({ currentWindow: true }, function (tabs) {
     const target = { tabId: tabs[0].id };
 
-    chrome.debugger.attach(target, "1.2", function () {
-      chrome.debugger.sendCommand(target, "Input.dispatchMouseEvent", {
-        type: "mouseMoved",
+    chrome.debugger.attach(target, requiredVersion, function () {
+      chrome.debugger.sendCommand(target, mouseEventCommand, {
+        type: MouseEventType.MouseMoved,
         x,
         y,
       });
-      chrome.debugger.sendCommand(target, "Input.dispatchMouseEvent", {
-        type: "mousePressed",
+      chrome.debugger.sendCommand(target, mouseEventCommand, {
+        type: MouseEventType.MousePressed,
         button,
         x,
         y,
         clickCount: 1,
       });
-      chrome.debugger.sendCommand(target, "Input.dispatchMouseEvent", {
-        type: "mouseReleased",
+      chrome.debugger.sendCommand(target, mouseEventCommand, {
+        type: MouseEventType.MouseReleased,
         button,
         x,
         y,
