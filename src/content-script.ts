@@ -1,5 +1,6 @@
 import { Clicker } from './services/clicker';
 import { debugLog } from './services/logger';
+import { Runner } from './services/runner';
 
 debugLog("👋🌐 HELLO WORLD!!!", new Date().getTime());
 
@@ -13,37 +14,5 @@ window.addEventListener("load", () => {
     randomWaitMax: 500,
   });
 
-  // Anonymous singleton
-  new (class {
-    readonly #coupons: Clicker;
-    readonly #loadButton: Clicker;
-
-    constructor(coupons: Clicker, loadButton: Clicker) {
-      this.#coupons = coupons;
-      this.#loadButton = loadButton;
-    }
-
-    async run() {
-      // State 1
-      //  Has coupon buttons -> Click all buttons
-      if (this.#coupons.hasMore()) {
-        // Note: console.log has been removed
-        console.warn("GOTTA CLICK'EM ALL!!!");
-        await this.#coupons.clickAll();
-        this.run();
-      }
-      // State 2
-      //  Has load more -> Click load more
-      else if (this.#loadButton.hasMore()) {
-        console.warn("LOAD MOARRR!!!");
-        await this.#loadButton.clickAll();
-        this.run();
-      }
-      // State 3
-      //  Has neither -> Finish
-      else {
-        console.warn("LE FINI! 🚀");
-      }
-    }
-  })(coupons, loadButton).run();
+  new Runner(coupons, loadButton).run();
 });
