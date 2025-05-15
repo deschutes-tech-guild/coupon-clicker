@@ -1,19 +1,17 @@
 // Converted to TS from: https://gist.github.com/ctsstc/73a74ae0f0c315262bf07cea9fdc7aa2#file-safeway-just-for-u-clicker-js
 
-import { debugLog } from './logger';
+import { debugLog } from './logger'
 
 export class Clicker {
   private readonly delay: number;
-  private readonly randomWait: boolean;
   private readonly randomWaitMax: number;
 
   constructor(
     private readonly document: Document,
     private readonly selector: string,
-    { delay = 1000, randomWait = true, randomWaitMax = 250 } = {}
+    { delay = 1000, randomWaitMax = 0 } = {}
   ) {
     this.delay = delay;
-    this.randomWait = randomWait;
     this.randomWaitMax = randomWaitMax;
   }
 
@@ -42,7 +40,7 @@ export class Clicker {
   }
 
   private getRandomWait(): number {
-    return this.randomWait ? Math.floor(Math.random() * this.randomWaitMax) : 0;
+    return Math.floor(Math.random() * this.randomWaitMax);
   }
 
   private findAll(): NodeListOf<Element> {
