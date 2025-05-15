@@ -1,8 +1,8 @@
-import { Clicker } from './services/clicker'
-import { debugLog } from './services/logger'
-import { Runner } from './services/runner'
+import { Clicker } from './services/clicker';
+import { debugLog } from './services/logger';
+import { Runner } from './services/runner';
 
-debugLog("👋🌐 HELLO WORLD!!!", new Date().getTime());
+debugLog("👋🌐 HELLO WORLD!!!", new Date().toLocaleString());
 
 window.addEventListener("load", () => {
   debugLog("PAGE LOADED");
