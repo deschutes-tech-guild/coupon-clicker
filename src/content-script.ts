@@ -1,18 +1,34 @@
-import { Clicker } from './services/clicker';
-import { debugLog } from './services/logger';
-import { Runner } from './services/runner';
+import { Clicker } from './services/clicker'
+import { debugLog } from './services/logger'
+import { Runner } from './services/runner'
+import { waitForElements } from './services/wait-for-elements'
 
-debugLog("👋🌐 HELLO WORLD!!!", new Date().toLocaleString());
+debugLog("👋🌐 Hello World!!!", new Date().toLocaleString());
 
 window.addEventListener("load", () => {
-  debugLog("PAGE LOADED");
+  debugLog("Page Loaded");
 
-  // Copied from: https://gist.github.com/ctsstc/73a74ae0f0c315262bf07cea9fdc7aa2#file-safeway-just-for-u-clicker-js
-  let couponClicker = new Clicker(window.document, "[id^=couponAddBtn]");
-  let loadButtonClicker = new Clicker(window.document, ".btn.load-more", {
+  waitForElements(window.document, ".section-heading", { interval: 500 }).then((hasElements) => {
+    if (!hasElements) {
+      debugLog("Coupon Header UI not Found");
+      return;
+    }
+
+    initialize();
+  });
+});
+
+function initialize() {
+  debugLog("Initializing");
+
+  const couponClicker = new Clicker(window.document, "[id^=couponAddBtn]", {
     delay: 2000,
-    randomWaitMax: 500,
+    randomWaitMax: 10000,
+  });
+  const loadButtonClicker = new Clicker(window.document, ".btn.load-more", {
+    delay: 3000,
+    randomWaitMax: 3000,
   });
 
   new Runner(couponClicker, loadButtonClicker).run();
-});
+}
