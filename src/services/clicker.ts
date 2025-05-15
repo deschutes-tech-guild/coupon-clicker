@@ -1,6 +1,9 @@
 // Converted to TS from: https://gist.github.com/ctsstc/73a74ae0f0c315262bf07cea9fdc7aa2#file-safeway-just-for-u-clicker-js
 
+import { simulateTrustedClickOnElement } from './debug-clicker'
 import { debugLog } from './logger'
+
+const debugging = true;
 
 export class Clicker {
   private readonly delay: number;
@@ -25,18 +28,24 @@ export class Clicker {
 
       all.forEach((el, index) =>
         setTimeout(() => {
+          this.clickElement(el);
+
           const isLast = index == all.length - 1;
-
-          // TODO: Use a real clicker; from debug-clicker
-          // simulateTrustedClickOnElement(el);
-          debugLog("CLICKED", el);
-
           if (isLast) {
             resolve();
           }
         }, index * this.delay + this.getRandomWait())
       );
     });
+  }
+
+  private clickElement(element: Element): boolean {
+    debugLog("Click", { debugging }, element);
+
+    if (debugging) return false;
+
+    simulateTrustedClickOnElement(element);
+    return true;
   }
 
   private getRandomWait(): number {
