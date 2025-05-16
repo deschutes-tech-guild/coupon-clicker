@@ -10,5 +10,5 @@
       "run_at": "document_start"
     }
   ],
-  "permissions": ["debugger"]
+  "permissions": ["debugger", "tabs"]
 }
